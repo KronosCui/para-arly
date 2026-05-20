@@ -23,7 +23,33 @@
       position: relative;
     }
 
-    /* ======== ANIMACIONES FLOTANTES (CORAZONES, FAROLES, ESTRELLAS) ======== */
+    /* ======== FONDO DE CIELO ESTRELLADO ======== */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        radial-gradient(2px 2px at 20% 30%, #fff, transparent),
+        radial-gradient(2px 2px at 40% 70%, #ffd966, transparent),
+        radial-gradient(1px 1px at 80% 20%, #fff, transparent),
+        radial-gradient(1px 1px at 10% 80%, #f7e05e, transparent),
+        radial-gradient(2px 2px at 60% 50%, #fff, transparent),
+        radial-gradient(1px 1px at 90% 60%, #ffd966, transparent),
+        radial-gradient(2px 2px at 30% 90%, #fff, transparent);
+      background-size: 200px 200px;
+      animation: twinkle 4s ease-in-out infinite alternate;
+      z-index: 0;
+      opacity: 0.5;
+    }
+    @keyframes twinkle {
+      0% { opacity: 0.3; }
+      100% { opacity: 0.7; }
+    }
+
+    /* ======== ANIMACIONES FLOTANTES MEJORADAS ======== */
     .floating-container {
       position: fixed;
       top: 0;
@@ -31,17 +57,19 @@
       width: 100%;
       height: 100%;
       pointer-events: none;
-      z-index: 0;
+      z-index: 1;
     }
     .floating-item {
       position: absolute;
       bottom: -60px;
       opacity: 0;
-      animation: floatUp 8s infinite;
-      font-size: 1.8rem;
+      animation: floatUp var(--duration, 8s) infinite;
+      animation-delay: var(--delay, 0s);
+      font-size: var(--size, 1.8rem);
       color: #f7e05e;
       text-shadow: 0 0 12px #ffb347;
     }
+    /* Diferentes tipos */
     .floating-item.heart {
       color: #ff6b81;
       text-shadow: 0 0 15px #ff3366;
@@ -51,41 +79,62 @@
       text-shadow: 0 0 18px #f0a500;
     }
     .floating-item.lantern {
-      font-size: 2.2rem;
       color: #e6b422;
       text-shadow: 0 0 20px #d4942b, 0 0 30px #b36b1e;
     }
+    .floating-item.firework {
+      color: #ffa500;
+      text-shadow: 0 0 12px #ff4500, 0 0 20px #ff6347;
+    }
+    .floating-item.note {
+      color: #c0a0ff;
+      text-shadow: 0 0 12px #a259ff;
+    }
+    .floating-item.sparkle {
+      color: #00ffff;
+      text-shadow: 0 0 15px #00bfff;
+    }
     @keyframes floatUp {
       0% {
-        transform: translateY(0) scale(0.5) rotate(0deg);
+        transform: translateY(0) scale(0.4) rotate(0deg);
         opacity: 0;
       }
-      10% {
+      15% {
         opacity: 0.9;
       }
-      50% {
-        opacity: 0.7;
+      60% {
+        opacity: 0.6;
       }
       90% {
-        opacity: 0.2;
+        opacity: 0.1;
       }
       100% {
-        transform: translateY(-110vh) scale(1.2) rotate(30deg);
+        transform: translateY(-110vh) scale(1.1) rotate(25deg);
         opacity: 0;
       }
     }
 
-    /* Distribución de elementos flotantes */
-    .item1 { left: 5%; animation-delay: 0s; }
-    .item2 { left: 15%; animation-delay: 1.5s; }
-    .item3 { left: 25%; animation-delay: 3s; }
-    .item4 { left: 35%; animation-delay: 4.5s; }
-    .item5 { left: 45%; animation-delay: 6s; }
-    .item6 { left: 55%; animation-delay: 2s; }
-    .item7 { left: 65%; animation-delay: 5s; }
-    .item8 { left: 75%; animation-delay: 0.8s; }
-    .item9 { left: 85%; animation-delay: 2.7s; }
-    .item10 { left: 95%; animation-delay: 4s; }
+    /* Distribución de elementos (ahora 20) */
+    .item1  { left: 2%;  --delay: 0s;    --duration: 7s;  --size: 1.6rem; }
+    .item2  { left: 8%;  --delay: 1.2s;  --duration: 8.5s;--size: 2.0rem; }
+    .item3  { left: 14%; --delay: 2.5s;  --duration: 7.8s;--size: 1.4rem; }
+    .item4  { left: 20%; --delay: 0.5s;  --duration: 9s;   --size: 2.2rem; }
+    .item5  { left: 26%; --delay: 3.2s;  --duration: 7.3s;--size: 1.8rem; }
+    .item6  { left: 32%; --delay: 1.8s;  --duration: 8s;   --size: 1.7rem; }
+    .item7  { left: 38%; --delay: 4.1s;  --duration: 9.2s;--size: 2.0rem; }
+    .item8  { left: 44%; --delay: 0.9s;  --duration: 7.5s;--size: 1.5rem; }
+    .item9  { left: 50%; --delay: 2.1s;  --duration: 8.8s;--size: 1.9rem; }
+    .item10 { left: 56%; --delay: 3.8s;  --duration: 7.2s;--size: 1.6rem; }
+    .item11 { left: 62%; --delay: 1.0s;  --duration: 9.5s;--size: 2.3rem; }
+    .item12 { left: 68%; --delay: 2.7s;  --duration: 8.2s;--size: 1.8rem; }
+    .item13 { left: 74%; --delay: 0.3s;  --duration: 7.6s;--size: 1.5rem; }
+    .item14 { left: 80%; --delay: 4.5s;  --duration: 8.9s;--size: 2.0rem; }
+    .item15 { left: 86%; --delay: 1.5s;  --duration: 7.4s;--size: 1.7rem; }
+    .item16 { left: 92%; --delay: 3.0s;  --duration: 9.1s;--size: 2.1rem; }
+    .item17 { left: 5%;  --delay: 2.2s;  --duration: 8.0s;--size: 1.9rem; }
+    .item18 { left: 35%; --delay: 4.8s;  --duration: 7.9s;--size: 1.6rem; }
+    .item19 { left: 65%; --delay: 1.7s;  --duration: 9.3s;--size: 2.2rem; }
+    .item20 { left: 95%; --delay: 0.7s;  --duration: 8.4s;--size: 1.8rem; }
 
     .card {
       background: #1e2f45;
@@ -95,7 +144,7 @@
       padding: 20px 16px 24px;
       box-shadow: 0 20px 35px rgba(0,0,0,0.5);
       border: 1px solid rgba(255,215,0,0.25);
-      z-index: 1;
+      z-index: 2;
       display: flex;
       flex-direction: column;
       gap: 16px;
@@ -148,7 +197,6 @@
       position: relative;
       overflow: hidden;
     }
-    /* Fondo animado sutil */
     .lyrics-panel::before {
       content: "";
       position: absolute;
@@ -241,18 +289,28 @@
 </head>
 <body>
 
-<!-- Elementos flotantes decorativos (fuera del cuadro del video) -->
+<!-- Contenedor flotante con 20 elementos variados -->
 <div class="floating-container">
   <span class="floating-item heart item1">❤️</span>
   <span class="floating-item star item2">✨</span>
   <span class="floating-item lantern item3">🏮</span>
   <span class="floating-item heart item4">💖</span>
-  <span class="floating-item star item5">🌟</span>
-  <span class="floating-item lantern item6">🏮</span>
-  <span class="floating-item heart item7">💕</span>
-  <span class="floating-item star item8">⭐</span>
-  <span class="floating-item lantern item9">🏮</span>
-  <span class="floating-item heart item10">❤️‍🔥</span>
+  <span class="floating-item firework item5">🎆</span>
+  <span class="floating-item star item6">🌟</span>
+  <span class="floating-item note item7">🎵</span>
+  <span class="floating-item lantern item8">🏮</span>
+  <span class="floating-item heart item9">💕</span>
+  <span class="floating-item sparkle item10">✳️</span>
+  <span class="floating-item firework item11">🎇</span>
+  <span class="floating-item star item12">⭐</span>
+  <span class="floating-item lantern item13">🏮</span>
+  <span class="floating-item note item14">🎶</span>
+  <span class="floating-item heart item15">❤️‍🔥</span>
+  <span class="floating-item sparkle item16">❇️</span>
+  <span class="floating-item firework item17">🎆</span>
+  <span class="floating-item star item18">🌠</span>
+  <span class="floating-item heart item19">💗</span>
+  <span class="floating-item lantern item20">🏮</span>
 </div>
 
 <div class="card">
@@ -285,8 +343,10 @@
 <script>
   // ========== CONFIGURACIÓN ==========
   const YOUTUBE_VIDEO_ID = 'fZSZMp32XaA';
+  // Puedes ajustar este valor si necesitas sincronización fina (positivo = retrasa, negativo = adelanta)
+  const TIME_OFFSET = 0; 
 
-  // ========== LÍNEAS DE TIEMPO (LETRA + MENSAJES) ==========
+  // ========== LÍNEAS DE TIEMPO (TU VERSIÓN PERSONALIZADA) ==========
   const timeline = [
     { time: 5.0, text: "Tiempo aquel viendo a la distancia", type: "lyric" },
     { time: 10.0, text: "Tiempo fue viendo al interior", type: "lyric" },
